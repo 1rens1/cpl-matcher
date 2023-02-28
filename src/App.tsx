@@ -25,13 +25,14 @@ export const App = () => {
         console.log('='.repeat(20));
         setTime(Date.now());
 
-        const seed = couple.join('');
+        const newCouple = [...couple].map((c) => c.toLowerCase()).sort((a, b) => a.localeCompare(b)) as typeof couple;
+        const seed = newCouple.join('');
         const seeded = Math.round(seedrandom(seed)() * 90);
         let match = seeded;
         console.log('Seeded', match);
 
         const simExtra = Math.round(seedrandom(seed)() * 10 + 2);
-        const sim = Math.round(similarity(...couple) * 10) + simExtra;
+        const sim = Math.round(similarity(...newCouple) * 10) + simExtra;
         console.log('Similarity', sim, `(+${simExtra})`);
 
         match = match + sim;
